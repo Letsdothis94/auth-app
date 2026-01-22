@@ -3,6 +3,7 @@ import { motion } from "motion/react";
 import Input from '../components/Input';
 import { AtSign, UserRoundPen, KeySquare } from "lucide-react";
 import { Link } from 'react-router';
+import PasswordStrength from '../components/PasswordStrength';
 
 const SignupPage = () => {
     const [email, setEmail] = useState("");
@@ -41,6 +42,7 @@ const SignupPage = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
+          <PasswordStrength password={password} />
           <motion.button
             type="submit"
             className="mt-5 w-full py-3 px-4 bg-gradient-to-r from-green-400 to-emerald-500 text-white font-bold rounded-lg shadow-lg hover:from-green-600 hover:to-emerald-700"
