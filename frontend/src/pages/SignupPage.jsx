@@ -2,13 +2,26 @@ import React, { useState } from 'react'
 import { motion } from "motion/react";
 import Input from '../components/Input';
 import { AtSign, UserRoundPen, KeySquare } from "lucide-react";
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import PasswordStrength from '../components/PasswordStrength';
+import { useAuthStore } from '../store/authStore';
 
 const SignupPage = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");
+    const { signup, error, isLoading } = useAuthStore();
+    const navigate = useNavigate();
+
+    const handleSignUp = async (e) => {
+      e.preventDefault();
+      try {
+        await signup(email, password, name);
+        navigate("/verify-email");
+      } catch (error) {
+        console.log(error);
+      }
+    }
 
   return (
     <motion.div
@@ -20,7 +33,7 @@ const SignupPage = () => {
         <h2 className="text-3xl font-bold mb-6 text-center text-transparent bg-clip-text bg-gradient-to-r from-green-400 to-emerald-500">
           Create Account
         </h2>
-        <form>
+        <form onSubmit={handleSignUp}>
           <Input
             icon={UserRoundPen}
             type="text"
@@ -43,6 +56,7 @@ const SignupPage = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
           <PasswordStrength password={password} />
+          { error && <p className='text-red-500 font-semibold mt-2'>{error}</p>}
           <motion.button
             type="submit"
             className="mt-5 w-full py-3 px-4 bg-gradient-to-r from-green-400 to-emerald-500 text-white font-bold rounded-lg shadow-lg hover:from-green-600 hover:to-emerald-700"
