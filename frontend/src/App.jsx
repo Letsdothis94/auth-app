@@ -3,6 +3,7 @@ import './App.css'
 import { Routes, Route } from 'react-router'
 import SignupPage from './pages/SignupPage';
 import LoginPage from './pages/LoginPage';
+import EmailVerificationPage from './pages/EmailVerificationPage';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -13,6 +14,7 @@ function App() {
         <Route path="/" element={"Home Auth Page React + Vite"} />
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/login" element={<LoginPage />} />
+        <Route path='/verify-email' element={<EmailVerificationPage />} />
       </Routes>
     </div>
   );
