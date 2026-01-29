@@ -9,6 +9,7 @@ import { useAuthStore } from './store/authStore';
 import { useEffect } from 'react';
 import ProtectedRoute from './components/ProtectedRoute';
 import RedirectAuthUser from './components/RedirectAuthUser';
+import ForgotPassword from './pages/ForgotPassword';
 
 function App() {
   const { isCheckingAuth, isAuthenticated, user, checkAuth } = useAuthStore();
@@ -47,6 +48,11 @@ function App() {
             </RedirectAuthUser>
           }
         />
+        <Route path="/forgot-password" element={
+          <RedirectAuthUser>
+            <ForgotPassword />
+          </RedirectAuthUser>
+        } />
         <Route
           path="/verify-email"
           element={
