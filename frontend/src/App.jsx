@@ -10,6 +10,7 @@ import { useEffect } from 'react';
 import ProtectedRoute from './components/ProtectedRoute';
 import RedirectAuthUser from './components/RedirectAuthUser';
 import ForgotPassword from './pages/ForgotPassword';
+import ResetPassPage from './pages/ResetPassPage';
 
 function App() {
   const { isCheckingAuth, isAuthenticated, user, checkAuth } = useAuthStore();
@@ -60,6 +61,15 @@ function App() {
               <EmailVerificationPage />
             </RedirectAuthUser>
           }
+        />
+        <Route
+          path='/reset-password/:token'
+          element={
+            <RedirectAuthUser>
+              <ResetPassPage />
+            </RedirectAuthUser>
+          }
+            
         />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
